@@ -3,8 +3,8 @@ package CSC295Week3;
 /**
  * MyArrayList
  */
-public class MyArrayList {
-    private int[] elements;
+public class MyArrayList<T> {
+    private Object[] elements;
     private int size;
     private final int CAPACITY = 10;
     
@@ -12,7 +12,7 @@ public class MyArrayList {
      * Constructor
      */
     public MyArrayList() {
-        elements = new int[CAPACITY]; //initial capacity
+        elements = new Object[CAPACITY]; //initial capacity
         size = 0;
     }
 
@@ -20,7 +20,7 @@ public class MyArrayList {
      * Adds element to beginning of the array
      * @param elem element to add
      */
-    public void AddStart(int elem) {
+    public void AddStart(T elem) {
         EnsureCapacity();
         for (int i = size; i > 0; i--) {
             elements[i] = elements[i-1];
@@ -33,7 +33,7 @@ public class MyArrayList {
      * Adds element to the end of array
      * @param elem element to add
      */
-    public void AddEnd(int elem) {
+    public void AddEnd(T elem) {
         EnsureCapacity();
         elements[size] = elem;
         size++;        
@@ -44,7 +44,7 @@ public class MyArrayList {
      * @param elem element to add
      * @param idx idx of elem to add
      */
-    public void AddAtIndex(int elem, int idx) {
+    public void AddAtIndex(T elem, int idx) {
         if(idx > size || idx < 0) {
             AddEnd(elem);
         } else {
@@ -62,7 +62,7 @@ public class MyArrayList {
      * @param idx idx to get
      * @return element of array list
      */
-    public int GetElementAtIndex(int idx) {
+    public Object GetElementAtIndex(int idx) {
         if(idx >= size || idx < 0) {
             return elements[size - 1];
         }
@@ -75,14 +75,65 @@ public class MyArrayList {
      */
     private void EnsureCapacity() {
         if(size == elements.length) {
-            int[] newElements = new int[elements.length * 2];
+            Object[] newElements = new Object[elements.length * 2];
             for(int i = 0; i < size; i++) {
                 newElements[i] = elements[i];
             }
             elements = newElements;
         }
     }  
+    /**
+     * Delete at index
+     * @param index - index to delete
+     */
+    public void DeleteAtIndex(int index) {
+        if(index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index " + index + " is out of ArrayList");
+        } else {
+            for(int i = index; i < size-1; i++) {
+                elements[i] = elements[i+1];
+            }
+            elements[size - 1] = 0; 
+            size--;
+        }     
+    }
+
+    public void DeleteAtStart() {
+        DeleteAtIndex(0);
+    }
+
+    public void DeleteAtEnd() {
+        DeleteAtIndex(size - 1);
+    }
     
+    /**
+     * Clear all elements
+     */
+    public void ClearAll() {
+        for(int i = 0; i < size; i++) {
+            elements[i] = null;
+        }
+        size = 0;
+    }
+
+    /**
+     * Checks if arrayList is empty
+     * @return boolean 
+     */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+
+    /**
+     * Returns size
+     * @return size
+     */
+    public int Size() {
+        return size;
+    }
+
+
     /**
      * Printing elements
      */

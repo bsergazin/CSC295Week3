@@ -24,7 +24,7 @@ public class Program {
 
         arrList.addAll(arrList1);
 
-        MyArrayList myArrayList = new MyArrayList();
+        MyArrayList<Integer> myArrayList = new MyArrayList<Integer>();
         myArrayList.AddEnd(3);
         myArrayList.AddEnd(6);
         myArrayList.AddEnd(7);
@@ -38,6 +38,30 @@ public class Program {
 
 
         myArrayList.Print();
+
+        try {
+            myArrayList.DeleteAtIndex(2);
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e);
+        }
+
+        myArrayList.Print();
+
+        System.out.println(myArrayList.isEmpty());
+        System.out.println(myArrayList.Size());
+        myArrayList.ClearAll();
+
+        myArrayList.Print();
+        System.out.println(myArrayList.Size());
+        System.out.println(myArrayList.isEmpty());
+
+
+
+        MyArrayList<String> myArrayList2 = new MyArrayList<String>();
+        myArrayList2.AddStart("Hi");
+
+        myArrayList2.Print();
 
     }
 }
