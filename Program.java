@@ -1,4 +1,4 @@
-package CSC295Week3;
+//package CSC295Week3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +8,21 @@ import java.util.Arrays;
  */
 public class Program {
     public static void main(String[] args) {
+        
+        MyLinkedList<String> linkedList = new MyLinkedList<String>();
+        linkedList.AddFront("World");
+        linkedList.AddFront("Hi");
+        linkedList.AddFront("Mike");
+
+        linkedList.Append("Last");
+
+        System.out.println(linkedList.toString());
+        System.out.println(linkedList.GetSize());
+
+
+
+
+        /* 
         int[] arr = {1, 3, 4};
         int[] arr1 = new int[3];
 
@@ -62,6 +77,8 @@ public class Program {
         myArrayList2.AddStart("Hi");
 
         myArrayList2.Print();
+
+        */
 
     }
 }

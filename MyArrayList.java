@@ -1,4 +1,4 @@
-package CSC295Week3;
+//package CSC295Week3;
 
 /**
  * MyArrayList
