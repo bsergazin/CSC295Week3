@@ -1,8 +1,5 @@
 //package CSC295Week3;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /**
  * Program
  */
@@ -10,14 +7,23 @@ public class Program {
     public static void main(String[] args) {
         
         MyLinkedList<String> linkedList = new MyLinkedList<String>();
-        linkedList.AddFront("World");
-        linkedList.AddFront("Hi");
-        linkedList.AddFront("Mike");
+        linkedList.Append("World");
+        linkedList.Append("Hi");
+        linkedList.Append("Mike");
 
         linkedList.Append("Last");
 
         System.out.println(linkedList.toString());
         System.out.println(linkedList.GetSize());
+        linkedList.Insert(2, "second");
+        System.out.println(linkedList.toString());
+
+
+        linkedList.DeleteBack();
+        System.out.println(linkedList.toString());
+
+        linkedList.DeleteNodeByValue("second");
+        System.out.println(linkedList.toString());
 
 
 
@@ -57,7 +63,6 @@ public class Program {
         try {
             myArrayList.DeleteAtIndex(2);
         } catch (Exception e) {
-            // TODO: handle exception
             System.out.println(e);
         }
 
