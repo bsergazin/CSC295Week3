@@ -1,11 +1,21 @@
 public class MyLinkedList<T> {
-    private Node<T> head;
+    private Node<T> head, tail;
     private int size = 0;
+
+    public Node<T> GetHead() {
+        return head;
+    }
+
+    public Node<T> GetTail() {
+        return tail;
+    }
+
 
     public void AddFront(T data) {
         Node<T> newNode = new Node<T>(data);
         if(head == null) {
             head = newNode;
+            tail = newNode;
         } else {
             newNode.next = head;
             head = newNode;
@@ -18,16 +28,20 @@ public class MyLinkedList<T> {
     }
 
     public void Append(T data) {
+       
         if(head == null) {
             AddFront(data);           
             return;
         } 
         Node<T> currentNode = head;
-        while(currentNode.next != null) {
-            currentNode = currentNode.next;
-        }
+        //while(currentNode.next != null) {
+        //    currentNode = currentNode.next;
+        //}
+
         Node<T> newNode = new Node<T>(data);
-        currentNode.next = newNode;
+        tail.next = currentNode;
+        tail = newNode;
+        //currentNode.next = newNode;
         size++;    
     }
 
@@ -36,6 +50,13 @@ public class MyLinkedList<T> {
     }
 
     public void Insert(int index, T data) {
+        if(index == size){
+            Append(data);
+        }
+
+        if(index < 0 || index > size-1)
+            return;
+
         Node<T> currentNode = head;
         for(int i = 0; i < index - 1; i++) {
             currentNode = currentNode.next;            
@@ -46,7 +67,11 @@ public class MyLinkedList<T> {
     }
 
     public void DeleteFront() {
+        if (head == tail) {
+            tail = null;
+        }
         head = head.next;
+        size--;
     }
 
     public void DeleteBack() {
@@ -55,10 +80,11 @@ public class MyLinkedList<T> {
             currentNode = currentNode.next;            
         }
         currentNode.next = null;
+        tail = currentNode;
+        size--;
     }
 
     public void DeleteNodeByValue(T data) {
-        int cnt = 0;
         if(head == null) {
             return;
         }
@@ -68,14 +94,19 @@ public class MyLinkedList<T> {
             size--;
             return;
         }
-        while(currentNode.next.data != data) {
-            currentNode = currentNode.next;
-            cnt++;
-        }
-        if(cnt-1  == size) {
+        if(currentNode.next == null) {
             return;
         }
-        currentNode.next = currentNode.next.next;   
+        while(currentNode.next.data != data) {
+            currentNode = currentNode.next;
+            if(currentNode.next == null) {
+                return;
+            }
+        }
+        currentNode.next = currentNode.next.next;  
+        if(currentNode.next == null) {
+            tail = currentNode;
+        }
         size--;             
     }
 
